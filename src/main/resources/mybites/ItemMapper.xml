@@ -13,4 +13,21 @@
     <select id="findAll" resultMap="itemMap">
         select * from item;
     </select>
+
+    <select id="findItemById" parameterType="java.lang.Integer" resultMap="itemMap">
+        select * from item where id = #{id};
+    </select>
+
+    <insert id="insertItem" parameterType="school.thoughtworks.pos.bean.Item" useGeneratedKeys="true" keyProperty="id">
+        insert into item value(null,#{price},#{name});
+    </insert>
+
+    <delete id="deleteItemById" parameterType="java.lang.Integer">
+        delete from item where id = #{id};
+    </delete>
+
+    <update id="updateItem" parameterType="school.thoughtworks.pos.bean.Item">
+        update item set price = #{price} , name = #{name} where id = #{id};
+    </update>
+
 </mapper>
