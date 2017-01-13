@@ -57,14 +57,9 @@ public class RootResource {
     @Path("/items/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getItemsById(@PathParam("id") Integer id) {
-
-        Item item = itemMapper.findItemById(id);
-        if (item == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        Map<String, Object> result = item.toMap();
-
-        return Response.status(Response.Status.OK).entity(result).build();
+        return Response.status(Response.Status.OK)
+                .entity(itemMapper.findItemById(id)
+                        .toMap()).build();
     }
 
     @POST
@@ -78,6 +73,7 @@ public class RootResource {
         Item item = new Item();
         item.setPrice(price);
         item.setName(name);
+        item.setCategoryId(1);
 
         itemMapper.insertItem(item);
         Integer id = item.getId();
@@ -98,24 +94,6 @@ public class RootResource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
-    //    @PUT
-//    @Path("/items/{id}")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response updateItem(
-//            @PathParam("id") Integer id,
-//            @QueryParam("name") String name,
-//            @QueryParam("price") Double price) {
-//
-//        Item item = new Item();
-//        item.setId(id);
-//        item.setName(name);
-//        item.setPrice(price);
-//
-//        itemMapper.updateItem(item);
-//        session.commit();
-//        return Response.status(Response.Status.NO_CONTENT).build();
-//    }
     @PUT
     @Path("/items/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -123,11 +101,11 @@ public class RootResource {
     public Response updateItem(
             @PathParam("id") Integer id,
             Map data) {
-
         Item item = new Item();
         item.setId(id);
         item.setName((String) data.get("name"));
         item.setPrice((Double) data.get("price"));
+        item.setCategoryId((Integer) data.get("categoryId"));
 
         itemMapper.updateItem(item);
         session.commit();

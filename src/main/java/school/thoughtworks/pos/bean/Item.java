@@ -7,6 +7,16 @@ public class Item {
     private int id;
     private double price;
     private String name;
+    private Integer categoryId;
+
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public int getId() {
         return id;
@@ -38,6 +48,8 @@ public class Item {
         result.put("id", getId());
         result.put("name", getName());
         result.put("price", getPrice());
+        result.put("categoryId", getCategoryId());
+        result.put("categoryUri", "categories/" + getCategoryId());
 
         return result;
     }

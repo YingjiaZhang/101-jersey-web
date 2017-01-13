@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@Path("/categorys")
+@Path("/categories")
 public class CategoryResource {
 
     @Inject
@@ -36,7 +36,7 @@ public class CategoryResource {
 
         Integer id = category.getId();
         Map result = new HashMap();
-        result.put("categoryUri", "categoty/" + id);
+        result.put("categoryUri", "categories/" + id);
 
         return Response.status(Response.Status.CREATED).entity(result).build();
     }
