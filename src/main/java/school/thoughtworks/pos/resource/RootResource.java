@@ -37,6 +37,7 @@ public class RootResource {
     @Path("/items")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllItems() {
+
         Map<String, Object> result = new HashMap<>();
 
         List<Item> originItems = itemMapper.findAll();

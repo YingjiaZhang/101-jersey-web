@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
+import school.thoughtworks.pos.mapper.CategoryMapper;
 import school.thoughtworks.pos.mapper.ItemMapper;
 
 import javax.ws.rs.ApplicationPath;
@@ -18,6 +19,7 @@ public class App extends ResourceConfig {
         SqlSession session = getSession();
 
         final ItemMapper itemMapper = session.getMapper(ItemMapper.class);
+        final CategoryMapper categoryMapper = session.getMapper(CategoryMapper.class);
 
         packages("school.thoughtworks.pos.resource")
                 .register(new AbstractBinder() {
@@ -25,6 +27,7 @@ public class App extends ResourceConfig {
                     @Override
                     protected void configure() {
                         bind(itemMapper).to(ItemMapper.class);
+                        bind(categoryMapper).to(CategoryMapper.class);
                         bind(session).to(SqlSession.class);
                     }
                 });

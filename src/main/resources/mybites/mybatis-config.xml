@@ -17,5 +17,6 @@
     </environments>
     <mappers>
         <mapper resource="mybites/ItemMapper.xml"/>
+        <mapper resource="mybites/CategoryMapper.xml"/>
     </mappers>
 </configuration>
