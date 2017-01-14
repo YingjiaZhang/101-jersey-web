@@ -67,6 +67,7 @@ public class RootResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertItem(Map data) {
+        
         Double price = (Double) data.get("price");
         String name = (String) data.get("name");
 

@@ -46,4 +46,11 @@
         select  * from cart where id = #{id}
     </select>
 
+    <insert id="insertItemCart" parameterType="java.lang.Integer" useGeneratedKeys="true" keyProperty="id">
+        insert into itemCart value(#{param1},#{param2});
+    </insert>
+
+    <delete id="deleteItemCart" parameterType="java.lang.Integer">
+        delete from itemCart where itemId = #{param1} and cartId=#{param2};
+    </delete>
 </mapper>

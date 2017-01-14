@@ -32,9 +32,15 @@ public class CartResource {
         cartMapper.insertCart(cart);
         session.commit();
 
-        Integer id = cart.getId();
+        Integer cartId = cart.getId();
+        if (data.get("items") != null) {
+            List<Integer> itemsId = (List<Integer>) data.get("items");
+            for (Integer itemId : itemsId) {
+                cartMapper.insertItemCart(itemId, cartId);
+            }
+        }
         Map result = new HashMap();
-        result.put("cartUri", "carts/" + id);
+        result.put("cartUri", "carts/" + cartId);
 
         return Response.status(Response.Status.CREATED).entity(result).build();
     }
@@ -45,7 +51,17 @@ public class CartResource {
     public Response deleteCartById(@PathParam("id") Integer id) {
         cartMapper.deleteCartById(id);
         session.commit();
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
 
+    @DELETE
+    @Path("/{cartId}/items/{itemId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteItemCart(
+            @PathParam("cartId") Integer cartId,
+            @PathParam("itemId") Integer itemId) {
+        cartMapper.deleteItemCart(itemId, cartId);
+        session.commit();
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
@@ -71,7 +87,7 @@ public class CartResource {
             @PathParam("id") Integer id) {
         Cart cart = cartMapper.findCartById(id);
         return Response.status(Response.Status.OK)
-                .entity(cart == null ? cart: cart.toMap())
+                .entity(cart == null ? cart : cart.toMap())
                 .build();
     }
 
