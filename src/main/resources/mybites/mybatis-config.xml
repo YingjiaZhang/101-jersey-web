@@ -18,5 +18,6 @@
     <mappers>
         <mapper resource="mybites/ItemMapper.xml"/>
         <mapper resource="mybites/CategoryMapper.xml"/>
+        <mapper resource="mybites/CartMapper.xml"/>
     </mappers>
 </configuration>

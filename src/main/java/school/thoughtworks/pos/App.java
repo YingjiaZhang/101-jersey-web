@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
+import school.thoughtworks.pos.mapper.CartMapper;
 import school.thoughtworks.pos.mapper.CategoryMapper;
 import school.thoughtworks.pos.mapper.ItemMapper;
 
@@ -20,6 +21,7 @@ public class App extends ResourceConfig {
 
         final ItemMapper itemMapper = session.getMapper(ItemMapper.class);
         final CategoryMapper categoryMapper = session.getMapper(CategoryMapper.class);
+        final CartMapper cartMapper = session.getMapper(CartMapper.class);
 
         packages("school.thoughtworks.pos.resource")
                 .register(new AbstractBinder() {
@@ -28,6 +30,7 @@ public class App extends ResourceConfig {
                     protected void configure() {
                         bind(itemMapper).to(ItemMapper.class);
                         bind(categoryMapper).to(CategoryMapper.class);
+                        bind(cartMapper).to(CartMapper.class);
                         bind(session).to(SqlSession.class);
                     }
                 });
