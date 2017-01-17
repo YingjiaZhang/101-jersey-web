@@ -156,3 +156,7 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/mac,macos,linux,windows,java,gradle,intellij
 
 /bin/
+
+.idea
+/101-jersey-web.iws
+/101-jersey-web.ipr
