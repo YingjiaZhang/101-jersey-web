@@ -54,6 +54,17 @@
 2. 参照 root_path_shoule_return_items_uri 完成上述接口的集成测试
 3. 学会用调试功能解决问题
 
+运行过程：
+```
+./gradlew flywayclean  			#清空数据库
+./gradlew flywaymigrate			#刷数据库，建表，刷数据
+./gradlew test					#运行测试文件
+
+cat  doc/api.raml				#查看接口文档
+
+./gradlew jettyrun				#启动jettyrun容器运行程序
+
+```
 
 #### 提升篇
 1. 从一个空库开始完成上述过程
