@@ -3,6 +3,8 @@ package school.thoughtworks.pos.resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+
 
 public class ItemResourceTest extends RootResourceTest {
 
@@ -27,7 +30,7 @@ public class ItemResourceTest extends RootResourceTest {
         Gson gson = new GsonBuilder().create();
 
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr,is("{\"totalCount\":6,\"items\":[{\"price\":10.0,\"categoryUri\":\"categories/2\",\"name\":\"apple\",\"id\":1,\"categoryId\":2},{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3},{\"price\":2.0,\"categoryUri\":\"categories/3\",\"name\":\"eraser\",\"id\":3,\"categoryId\":3},{\"price\":6.0,\"categoryUri\":\"categories/2\",\"name\":\"orange\",\"id\":4,\"categoryId\":2},{\"price\":4.0,\"categoryUri\":\"categories/2\",\"name\":\"banana\",\"id\":5,\"categoryId\":2},{\"price\":3.0,\"categoryUri\":\"categories/1\",\"name\":\"flower\",\"id\":6,\"categoryId\":1}]}"));
+        assertThat(jsonStr,is("{\"totalCount\":6,\"items\":[{\"price\":13.1,\"categoryUri\":\"categories/1\",\"name\":\"all\",\"id\":1,\"categoryId\":1},{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3},{\"price\":2.0,\"categoryUri\":\"categories/3\",\"name\":\"eraser\",\"id\":3,\"categoryId\":3},{\"price\":6.0,\"categoryUri\":\"categories/2\",\"name\":\"orange\",\"id\":4,\"categoryId\":2},{\"price\":4.0,\"categoryUri\":\"categories/2\",\"name\":\"banana\",\"id\":5,\"categoryId\":2},{\"price\":13.1,\"categoryUri\":\"categories/1\",\"name\":\"success\",\"id\":7,\"categoryId\":1}]}"));
     }
 
     @Test

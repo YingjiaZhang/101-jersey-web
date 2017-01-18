@@ -18,10 +18,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class RootResourceTest extends JerseyTest {
-//
-//    protected SqlSessionManager sqlSessionManager = mock(SqlSessionManager.class);
-//    protected ItemMapper itemMapper = mock(ItemMapper.class);
-//    protected CategoryMapper categoryMapper = mock(CategoryMapper.class);
 
     @Override
     protected Application configure() {
