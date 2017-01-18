@@ -143,3 +143,74 @@ types:
             name: string
       responses:
         204:
+/carts:
+  get:
+    description: 获取所有的购物车列表
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              totalCount: integer
+              "items":
+                properties:
+                  []:
+                    properties:
+                      id: integer
+                      userId: string
+                      items:
+                        properties:
+                          []:
+                            properties:
+                              price: integer
+                              categoryUri: string
+                              name: string
+                              id: integer
+                              categoryId: integer
+  post:
+    description: 插入一个购物车信息
+    body:
+      application/json:
+        properties:
+          userId: integer
+          items: integer[]
+    responses:
+      201:
+        body:
+          application/json:
+            properties:
+              cartUri: string
+
+  /{id}:
+    get:
+      description: 根据购物车id获取指定购物车详细信息
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                id: integer
+                userId: string
+                items:
+                  properties:
+                    []:
+                      properties:
+                        price: integer
+                        categoryUri: string
+                        name: string
+                        id: integer
+                        categoryId: integer
+
+    delete:
+      description: 删除指定id的购物车信息
+      responses:
+        204:
+
+    put:
+      description: 更新指定id的购物车信息
+      body:
+        application/json:
+          properties:
+            userId: integer
+      responses:
+        204:
