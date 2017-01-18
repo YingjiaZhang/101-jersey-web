@@ -86,3 +86,60 @@ types:
             categoryId: integer
       responses:
         204:
+
+/categories:
+  get:
+    description: 获取所有的分类列表
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              totalCount: integer
+              categories:
+                properties:
+                  []:
+                    properties:
+                      name: string
+                      id: integer
+                      categoryUri: string
+  post:
+    description: 插入一个分类信息
+    body:
+      application/json:
+        properties:
+          name: string
+    responses:
+      201:
+        body:
+          application/json:
+            properties:
+              categoryUri: string
+
+  /{id}:
+    get:
+      description: 根据分类id获取指定商品信息
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                price: integer
+                categoryUri: string
+                name: string
+                id: integer
+                categoryId: integer
+
+    delete:
+      description: 删除指定id的分类信息
+      responses:
+        204:
+
+    put:
+      description: 更新指定id的分类信息
+      body:
+        application/json:
+          properties:
+            name: string
+      responses:
+        204:
