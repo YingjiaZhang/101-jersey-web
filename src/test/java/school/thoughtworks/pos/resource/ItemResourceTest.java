@@ -1,5 +1,7 @@
 package school.thoughtworks.pos.resource;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
@@ -16,12 +18,16 @@ public class ItemResourceTest extends RootResourceTest {
     String basePath = "/items";
 
     @Test
-    public void root_path_should_return_items_uri() throws Exception {
-        Response response = target("/").request().get();
+    public void should_return_all_items() throws Exception {
+
+        Response response = target(basePath).request().get();
         assertThat(response.getStatus(), is(200));
 
         Map result = response.readEntity(Map.class);
-        assertThat(result.get("items"), is("/items"));
+        Gson gson = new GsonBuilder().create();
+
+        String jsonStr = gson.toJson(result);
+        assertThat(jsonStr,is("{\"totalCount\":6,\"items\":[{\"price\":10.0,\"categoryUri\":\"categories/2\",\"name\":\"apple\",\"id\":1,\"categoryId\":2},{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3},{\"price\":2.0,\"categoryUri\":\"categories/3\",\"name\":\"eraser\",\"id\":3,\"categoryId\":3},{\"price\":6.0,\"categoryUri\":\"categories/2\",\"name\":\"orange\",\"id\":4,\"categoryId\":2},{\"price\":4.0,\"categoryUri\":\"categories/2\",\"name\":\"banana\",\"id\":5,\"categoryId\":2},{\"price\":3.0,\"categoryUri\":\"categories/1\",\"name\":\"flower\",\"id\":6,\"categoryId\":1}]}"));
     }
 
     @Test
