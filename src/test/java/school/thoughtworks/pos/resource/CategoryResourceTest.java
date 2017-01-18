@@ -67,7 +67,6 @@ public class CategoryResourceTest extends RootResourceTest {
     @Test
     public void should_update_category_success() throws Exception {
         Map data = new HashMap();
-
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath + "/4").queryParam("name","all-test").request().put(entity);
         assertThat(response.getStatus(), is(204));

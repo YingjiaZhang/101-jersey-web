@@ -7,6 +7,7 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
 import org.junit.Test;
 import school.thoughtworks.pos.App;
+import school.thoughtworks.pos.mapper.CartMapper;
 import school.thoughtworks.pos.mapper.CategoryMapper;
 import school.thoughtworks.pos.mapper.ItemMapper;
 
@@ -26,12 +27,14 @@ public class RootResourceTest extends JerseyTest {
         SqlSession session = App.getSession();
         ItemMapper itemMapper = session.getMapper(ItemMapper.class);
         CategoryMapper categoryMapper = session.getMapper(CategoryMapper.class);
+        CartMapper cartMapper = session.getMapper(CartMapper.class);
 
         return new ResourceConfig().register(new AbstractBinder() {
 
             @Override
             protected void configure() {
                 bind(itemMapper).to(ItemMapper.class);
+                bind(cartMapper).to(CartMapper.class);
                 bind(categoryMapper).to(CategoryMapper.class);
                 bind(session).to(SqlSession.class);
             }
