@@ -1,0 +1,88 @@
+#%RAML 1.0
+title: supermarket-api
+version: 1.0
+baseUri: /
+types:
+  TestType:
+    type: object
+    properties:
+      id: number
+      optional?: string
+      expanded:
+        type: object
+        properties:
+          count: number
+/:
+  get:
+    description: 测试根路径
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "items": "/items"
+              }
+
+/items:
+  get:
+    description: 获取所有的商品列表
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              totalCount: integer
+              items:
+                properties:
+                  []:
+                    properties:
+                      price: integer
+                      categoryUri: string
+                      name: string
+                      id: integer
+                      categoryId: integer
+  post:
+    description: 插入一个商品信息
+    body:
+      application/json:
+        properties:
+          name: string
+          price: number # double
+          categoryId: integer
+    responses:
+      201:
+        body:
+          application/json:
+            properties:
+               itemUri: string
+
+  /{id}:
+    get:
+      description: 根据商品id获取指定商品信息
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                price: integer
+                categoryUri: string
+                name: string
+                id: integer
+                categoryId: integer
+
+    delete:
+      description: 删除指定商品id的商品信息
+      responses:
+        204:
+
+    put:
+      description: 更新指定商品id的商品信息
+      body:
+        application/json:
+          properties:
+            price: number #double
+            name: string
+            categoryId: integer
+      responses:
+        204:

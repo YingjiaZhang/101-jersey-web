@@ -57,9 +57,10 @@ public class RootResource {
     @Path("/items/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getItemsById(@PathParam("id") Integer id) {
+        Item item = itemMapper.findItemById(id);
         return Response.status(Response.Status.OK)
-                .entity(itemMapper.findItemById(id)
-                        .toMap()).build();
+                .entity(item == null ? item : item.toMap())
+                .build();
     }
 
     @POST
@@ -90,7 +91,7 @@ public class RootResource {
     @Path("/items/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertItem(@PathParam("id") Integer id) {
-        itemMapper.deleteItemById(id);
+        System.out.println(itemMapper.deleteItemById(id));
         session.commit();
         return Response.status(Response.Status.NO_CONTENT).build();
     }
