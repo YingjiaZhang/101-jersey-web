@@ -60,11 +60,15 @@ public class ItemResource {
 
         Double price = (Double) data.get("price");
         String name = (String) data.get("name");
-
+        Integer categoryId = 1;
+        if(data.get("categoryId") != null) {
+            categoryId = (Integer) data.get("categoryId");
+        }
+        
         Item item = new Item();
         item.setPrice(price);
         item.setName(name);
-        item.setCategoryId(1);
+        item.setCategoryId(categoryId);
 
         itemMapper.insertItem(item);
         Integer id = item.getId();
