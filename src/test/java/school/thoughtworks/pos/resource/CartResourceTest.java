@@ -45,9 +45,9 @@ public class CartResourceTest extends RootResourceTest {
     }
 
     @Test
-    public void should_return_cart_by_Id_null() throws Exception {
+    public void should_return_cart_by_Id_failure() throws Exception {
         Response response = target(basePath + "/4").request().get();
-        assertThat(response.getStatus(), is(200));
+        assertThat(response.getStatus(), is(404));
     }
 
     @Test

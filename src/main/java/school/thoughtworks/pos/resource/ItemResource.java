@@ -47,9 +47,10 @@ public class ItemResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getItemsById(@PathParam("id") Integer id) {
         Item item = itemMapper.findItemById(id);
-        return Response.status(Response.Status.OK)
-                .entity(item == null ? item : item.toMap())
-                .build();
+        if (item == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(item.toMap()).build();
     }
 
     @POST

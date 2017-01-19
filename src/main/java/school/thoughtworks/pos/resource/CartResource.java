@@ -86,9 +86,10 @@ public class CartResource {
     public Response findCartId(
             @PathParam("id") Integer id) {
         Cart cart = cartMapper.findCartById(id);
-        return Response.status(Response.Status.OK)
-                .entity(cart == null ? cart : cart.toMap())
-                .build();
+        if (cart == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(cart.toMap()).build();
     }
 
     @GET

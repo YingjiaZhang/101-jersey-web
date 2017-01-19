@@ -71,23 +71,25 @@ public class CategoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findCategoryId(
             @PathParam("id") Integer id) {
-        return Response.status(Response.Status.OK)
-                .entity(categoryMapper.findCategoryById(id).toMap())
-                .build();
+        Category category = categoryMapper.findCategoryById(id);
+        if (category == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(category.toMap()).build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public  Response findAll(){
+    public Response findAll() {
         List<Category> originCategories = categoryMapper.findAll();
 
-        List<Map>  categories = originCategories
+        List<Map> categories = originCategories
                 .stream()
                 .map(category -> category.toMap())
                 .collect(Collectors.toList());
 
-        Map result  = new HashMap();
-        result.put("items",categories);
+        Map result = new HashMap();
+        result.put("items", categories);
         result.put("totalCount", categories.size());
 
         return Response.status(Response.Status.OK)
