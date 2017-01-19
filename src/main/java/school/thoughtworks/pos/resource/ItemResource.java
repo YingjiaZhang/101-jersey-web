@@ -64,7 +64,7 @@ public class ItemResource {
         if(data.get("categoryId") != null) {
             categoryId = (Integer) data.get("categoryId");
         }
-        
+
         Item item = new Item();
         item.setPrice(price);
         item.setName(name);
