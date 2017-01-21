@@ -134,7 +134,15 @@ types:
       description: 删除指定id的分类信息
       responses:
         204:
-
+          description: 删除成功
+        412:
+          description: 删除失败，该分类下还有商品，不能删除
+          body:
+            application/json:
+              example : | 
+                {
+                  "meaasge": "该分类下还有商品，不能删除！"
+                }
     put:
       description: 更新指定id的分类信息
       body:
