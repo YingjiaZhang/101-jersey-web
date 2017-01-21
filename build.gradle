@@ -39,3 +39,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.flywaydb:flyway-core:3.2.1'
 }
+
+flyway {
+    locations = ['filesystem:src/main/resources/db/migration','filesystem:src/test/resources/db/migration']
+}
