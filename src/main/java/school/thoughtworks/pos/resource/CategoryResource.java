@@ -45,11 +45,18 @@ public class CategoryResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteCategoryById(@PathParam("id") Integer id) {
-        categoryMapper.deleteCategoryById(id);
-        session.commit();
-
+        try {
+            categoryMapper.deleteCategoryById(id);
+            session.commit();
+        } catch (Exception e) {
+            session.rollback();
+            Map message = new HashMap();
+            message.put("meaasge", "该分类下还有商品，不能删除！");
+            return Response.status(Response.Status.PRECONDITION_FAILED).entity(message).build();
+        }
         return Response.status(Response.Status.NO_CONTENT).build();
     }
+
 
     @PUT
     @Path("/{id}")

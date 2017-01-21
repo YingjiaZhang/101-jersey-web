@@ -65,6 +65,12 @@ public class CategoryResourceTest extends RootResourceTest {
     }
 
     @Test
+    public void should_delete_category_failure() throws Exception {
+        Response response = target(basePath + "/2").request().delete();
+        assertThat(response.getStatus(), is(412));
+    }
+
+    @Test
     public void should_update_category_success() throws Exception {
         Map data = new HashMap();
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
