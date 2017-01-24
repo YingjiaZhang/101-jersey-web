@@ -139,7 +139,7 @@ types:
           description: 删除失败，该分类下还有商品，不能删除
           body:
             application/json:
-              example : | 
+              example : |
                 {
                   "meaasge": "该分类下还有商品，不能删除！"
                 }
@@ -222,3 +222,12 @@ types:
             userId: integer
       responses:
         204:
+    /items/{id}:
+      put:
+        description: 更新指定 cart.id 下 items.id 的购物车信息
+        body:
+          application/json:
+            example : |
+              {}
+        responses:
+          204:
