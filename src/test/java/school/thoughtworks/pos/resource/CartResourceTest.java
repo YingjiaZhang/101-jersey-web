@@ -90,5 +90,12 @@ public class CartResourceTest extends RootResourceTest {
         assertThat(response.getStatus(), is(204));
     }
 
+    @Test
+    public void should_delete_items_of_carts() throws Exception {
+        Map data = new HashMap();
+        Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/2/items/1").request().put(entity);
+        assertThat(response.getStatus(), is(204));
+    }
 
 }

@@ -54,7 +54,7 @@ public class CartResource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
-    @DELETE
+    @PUT
     @Path("/{cartId}/items/{itemId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteItemCart(
