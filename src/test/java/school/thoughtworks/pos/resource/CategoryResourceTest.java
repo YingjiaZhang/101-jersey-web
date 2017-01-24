@@ -45,7 +45,7 @@ public class CategoryResourceTest extends RootResourceTest {
 
     @Test
     public void should_return_category_by_Id_failure() throws Exception {
-        Response response = target(basePath + "/3").request().get();
+        Response response = target(basePath + "/5").request().get();
         assertThat(response.getStatus(), is(404));
     }
 

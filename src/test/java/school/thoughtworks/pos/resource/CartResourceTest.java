@@ -29,34 +29,15 @@ public class CartResourceTest extends RootResourceTest {
         Gson gson = new GsonBuilder().create();
 
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"totalCount\":3,\"items\":[{\"id\":1,\"userId\":1,\"items\":[{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3},{\"price\":2.0,\"categoryUri\":\"categories/3\",\"name\":\"eraser\",\"id\":3,\"categoryId\":3},{\"price\":6.0,\"categoryUri\":\"categories/2\",\"name\":\"orange\",\"id\":4,\"categoryId\":2}]},{\"id\":2,\"userId\":2,\"items\":[{\"price\":13.1,\"categoryUri\":\"categories/1\",\"name\":\"all\",\"id\":1,\"categoryId\":1},{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3}]},{\"id\":3,\"userId\":3,\"items\":[{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3}]}]}"));
+        assertThat(jsonStr, is("{\"totalCount\":3,\"items\":[{\"id\":2,\"userId\":2,\"items\":[{\"price\":13.1,\"categoryUri\":\"categories/1\",\"name\":\"all\",\"id\":1,\"categoryId\":1},{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3}]},{\"id\":3,\"userId\":3,\"items\":[{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3}]},{\"id\":4,\"userId\":1,\"items\":[]}]}"));
     }
 
     @Test
-    public void should_return_cart_by_Id_success() throws Exception {
-
-        Response response = target(basePath + "/2").request().get();
-        Map result = response.readEntity(Map.class);
-
-        assertThat(response.getStatus(), is(200));
-        Gson gson = new GsonBuilder().create();
-        String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"id\":2,\"userId\":2,\"items\":[{\"price\":13.1,\"categoryUri\":\"categories/1\",\"name\":\"all\",\"id\":1,\"categoryId\":1},{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3}]}"));
-    }
-
-    @Test
-    public void should_return_cart_by_Id_failure() throws Exception {
-        Response response = target(basePath + "/4").request().get();
-        assertThat(response.getStatus(), is(404));
-    }
-
-    @Test
-    public void should_insert_cart_and_items_is_null_success() throws Exception {
+    public void should_update_cart_success() throws Exception {
         Map data = new HashMap();
-        data.put("userId", 1);
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath).request().post(entity);
-        assertThat(response.getStatus(), is(201));
+        Response response = target(basePath + "/2").queryParam("userId", 3).request().put(entity);
+        assertThat(response.getStatus(), is(204));
     }
 
     @Test
@@ -77,16 +58,37 @@ public class CartResourceTest extends RootResourceTest {
     }
 
     @Test
-    public void should_delete_cart_success() throws Exception {
-        Response response = target(basePath + "/4").request().delete();
-        assertThat(response.getStatus(), is(204));
+    public void should_insert_cart_and_items_is_null_success() throws Exception {
+        Map data = new HashMap();
+        data.put("userId", 1);
+        Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath).request().post(entity);
+        assertThat(response.getStatus(), is(201));
     }
 
     @Test
-    public void should_update_cart_success() throws Exception {
-        Map data = new HashMap();
-        Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/2").queryParam("userId", 3).request().put(entity);
+    public void should_return_cart_by_Id_success() throws Exception {
+
+        Response response = target(basePath + "/2").request().get();
+        Map result = response.readEntity(Map.class);
+
+        assertThat(response.getStatus(), is(200));
+        Gson gson = new GsonBuilder().create();
+        String jsonStr = gson.toJson(result);
+        assertThat(jsonStr, is("{\"id\":2,\"userId\":2,\"items\":[{\"price\":13.1,\"categoryUri\":\"categories/1\",\"name\":\"all\",\"id\":1,\"categoryId\":1},{\"price\":5.0,\"categoryUri\":\"categories/3\",\"name\":\"pen\",\"id\":2,\"categoryId\":3}]}"));
+    }
+
+    @Test
+    public void should_return_cart_by_Id_failure() throws Exception {
+        Response response = target(basePath + "/0").request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_delete_cart_success() throws Exception {
+        Response response = target(basePath + "/1").request().delete();
         assertThat(response.getStatus(), is(204));
     }
+
+
 }
